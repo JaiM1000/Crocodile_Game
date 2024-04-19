@@ -41,10 +41,14 @@ public class BasicGameApp implements Runnable, KeyListener {
    
 	public BufferStrategy bufferStrategy;
 	public Image crocPic;
+	public Image frogPic;
+	public Image background;
 
    //Declare the objects used in the program
    //These are things that are made up of more than one variable type
 	private Crocodile croc;
+	private Frog frog1;
+	private RiverBackground background1;
 
 
    // Main method definition
@@ -68,6 +72,12 @@ public class BasicGameApp implements Runnable, KeyListener {
 
 		crocPic = Toolkit.getDefaultToolkit().getImage("crocodile.jpg"); //load the picture
 		croc = new Crocodile(10,100);
+
+		frogPic = Toolkit.getDefaultToolkit().getImage("frog.jpg"); //load the picture
+		frog1 = new Frog(0,0);
+
+		background = Toolkit.getDefaultToolkit().getImage("RiverBackground.jpg"); //load the picture
+		background1 = new RiverBackground(0,0);
 
 
 	}// BasicGameApp()
@@ -96,6 +106,7 @@ public class BasicGameApp implements Runnable, KeyListener {
 	{
       //calls the move( ) code in the objects
 		croc.move();
+		frog1.move();
 	}
 	
    //Pauses or sleeps the computer for the amount specified in milliseconds
@@ -146,7 +157,9 @@ public class BasicGameApp implements Runnable, KeyListener {
 		g.clearRect(0, 0, WIDTH, HEIGHT);
 
       //draw the image of the astronaut
+		g.drawImage(background1, background1.xpos, background1.ypos, background1.width, background1.height, null);
 		g.drawImage(crocPic, croc.xpos, croc.ypos, croc.width, croc.height, null);
+		g.drawImage(frogPic, frog1.xpos, frog1.ypos, frog1.width, frog1.height, null);
 
 		g.dispose();
 
@@ -159,25 +172,45 @@ public class BasicGameApp implements Runnable, KeyListener {
 	}
 
 	public void keyPressed(KeyEvent e) {
-		if(e.getKeyCode() == 38) {
+		if(e.getKeyCode() == 38) { // up
 			croc.dx = 0;
-			croc.dy = -3;
+			croc.dy = -4;
 		}
 
-		if(e.getKeyCode() == 40) {
+		if(e.getKeyCode() == 40) { // down
 			croc.dx = 0;
-			croc.dy = 3;
+			croc.dy = 4;
+		}
+
+		if(e.getKeyCode() == 37) { // left
+			croc.dx = -3;
+			croc.dy = 0;
+		}
+
+		if(e.getKeyCode() == 39) { // right
+			croc.dx = 3;
+			croc.dy = 0;
 		}
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		if(e.getKeyCode() == 38) {
+		if(e.getKeyCode() == 38) { // up
 			croc.dx = 0;
 			croc.dy = 0;
 		}
 
-		if(e.getKeyCode() == 40) {
+		if(e.getKeyCode() == 40) { // down
+			croc.dx = 0;
+			croc.dy = 0;
+		}
+
+		if(e.getKeyCode() == 37) { // left
+			croc.dx = 0;
+			croc.dy = 0;
+		}
+
+		if(e.getKeyCode() == 39) { // right
 			croc.dx = 0;
 			croc.dy = 0;
 		}

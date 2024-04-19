@@ -3,7 +3,7 @@ import java.awt.*;
 /**
  * Created by chales on 11/6/2017.
  */
-public class Crocodile {
+public class Frog {
 
     //VARIABLE DECLARATION SECTION
     //Here's where you state which variables you are going to use.
@@ -25,13 +25,13 @@ public class Crocodile {
 
     //This is a SECOND constructor that takes 3 parameters.  This allows us to specify the hero's name and position when we build it.
     // if you put in a String, an int and an int the program will use this constructor instead of the one above.
-    public Crocodile(int pXpos, int pYpos) {
-        xpos = 10;
-        ypos = 275;
-        dx = 0;
-        dy = 0;
-        width = 90;
-        height = 90;
+    public Frog(int pXpos, int pYpos) {
+        xpos = 350;
+        ypos = 200;
+        dx = (int)(Math.random()*8);
+        dy = (int)(Math.random()*8);
+        width = 45;
+        height = 45;
         isAlive = true;
 
     } // constructor
@@ -40,5 +40,18 @@ public class Crocodile {
     public void move() {
         xpos = xpos + dx;
         ypos = ypos + dy;
+
+        if(xpos >= 940){
+            dx = -dx;
+        }
+        if(xpos < 0){
+            dx = -dx;
+        }
+        if(ypos < 20){
+            dy = -dy;
+        }
+        if(ypos >= 650){
+            dy = -dy;
+        }
     }
 }
