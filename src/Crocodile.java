@@ -30,8 +30,8 @@ public class Crocodile {
         ypos = 275;
         dx = 0;
         dy = 0;
-        width = 90;
-        height = 90;
+        width = 60;
+        height = 60;
         isAlive = true;
 
     } // constructor

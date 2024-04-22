@@ -43,13 +43,13 @@ public class BasicGameApp implements Runnable, KeyListener {
 	public Image crocPic;
 	public Image frogPic;
 	public Image background;
+	public Image fishPic;
+	public Fish[] fishes;
 
    //Declare the objects used in the program
    //These are things that are made up of more than one variable type
 	private Crocodile croc;
 	private Frog frog1;
-	private RiverBackground background1;
-
 
    // Main method definition
    // This is the code that runs first and automatically
@@ -76,9 +76,14 @@ public class BasicGameApp implements Runnable, KeyListener {
 		frogPic = Toolkit.getDefaultToolkit().getImage("frog.jpg"); //load the picture
 		frog1 = new Frog(0,0);
 
-		background = Toolkit.getDefaultToolkit().getImage("RiverBackground.jpg"); //load the picture
-		background1 = new RiverBackground(0,0);
+		fishPic = Toolkit.getDefaultToolkit().getImage("fish.jpg"); //load the picture
+		fishes = new Fish[4];
 
+		for(int i = 0; i < fishes.length; i++) {
+			fishes[i] = new Fish((int)(Math.random()*1000), (int)(Math.random()*650));
+		}
+		
+		background = Toolkit.getDefaultToolkit().getImage("RiverBackground.jpg"); //load the picture
 
 	}// BasicGameApp()
 
@@ -94,7 +99,6 @@ public class BasicGameApp implements Runnable, KeyListener {
 
       //for the moment we will loop things forever.
 		while (true) {
-
          moveThings();  //move all the game objects
          render();  // paint the graphics
          pause(20); // sleep for 10 ms
@@ -107,6 +111,9 @@ public class BasicGameApp implements Runnable, KeyListener {
       //calls the move( ) code in the objects
 		croc.move();
 		frog1.move();
+		for(int i = 0; i < fishes.length; i++) {
+			fishes[i].move();
+		}
 	}
 	
    //Pauses or sleeps the computer for the amount specified in milliseconds
@@ -157,15 +164,18 @@ public class BasicGameApp implements Runnable, KeyListener {
 		g.clearRect(0, 0, WIDTH, HEIGHT);
 
       //draw the image of the astronaut
-		g.drawImage(background1, background1.xpos, background1.ypos, background1.width, background1.height, null);
+		g.drawImage(background,0, 0, WIDTH, HEIGHT, null);
 		g.drawImage(crocPic, croc.xpos, croc.ypos, croc.width, croc.height, null);
 		g.drawImage(frogPic, frog1.xpos, frog1.ypos, frog1.width, frog1.height, null);
+
+		for(int i = 0; i < fishes.length; i++) {
+			g.drawImage(fishPic, fishes[i].xpos, fishes[i].ypos, fishes[i].width, fishes[i].height, null);
+		}
 
 		g.dispose();
 
 		bufferStrategy.show();
 	}
-
 	@Override
 	public void keyTyped(KeyEvent e) {
 
@@ -174,21 +184,21 @@ public class BasicGameApp implements Runnable, KeyListener {
 	public void keyPressed(KeyEvent e) {
 		if(e.getKeyCode() == 38) { // up
 			croc.dx = 0;
-			croc.dy = -4;
+			croc.dy = -7;
 		}
 
 		if(e.getKeyCode() == 40) { // down
 			croc.dx = 0;
-			croc.dy = 4;
+			croc.dy = 7;
 		}
 
 		if(e.getKeyCode() == 37) { // left
-			croc.dx = -3;
+			croc.dx = -7;
 			croc.dy = 0;
 		}
 
 		if(e.getKeyCode() == 39) { // right
-			croc.dx = 3;
+			croc.dx = 7;
 			croc.dy = 0;
 		}
 	}
