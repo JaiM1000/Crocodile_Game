@@ -26,12 +26,12 @@ public class Frog {
     //This is a SECOND constructor that takes 3 parameters.  This allows us to specify the hero's name and position when we build it.
     // if you put in a String, an int and an int the program will use this constructor instead of the one above.
     public Frog(int pXpos, int pYpos) {
-        xpos = 350;
-        ypos = 200;
+        xpos = 500;
+        ypos = 500;
         dx = 8;
         dy = 8;
-        width = 35;
-        height = 35;
+        width = 70;
+        height = 70;
         isAlive = true;
 
     } // constructor

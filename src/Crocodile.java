@@ -27,11 +27,11 @@ public class Crocodile {
     // if you put in a String, an int and an int the program will use this constructor instead of the one above.
     public Crocodile(int pXpos, int pYpos) {
         xpos = 10;
-        ypos = 275;
+        ypos = 500;
         dx = 0;
         dy = 0;
-        width = 60;
-        height = 60;
+        width = 90;
+        height = 90;
         isAlive = true;
 
     } // constructor

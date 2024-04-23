@@ -33,6 +33,7 @@ public class BasicGameApp implements Runnable, KeyListener {
    //Sets the width and height of the program window
 	final int WIDTH = 1000;
 	final int HEIGHT = 700;
+	public int backgroundX = 0;
 
    //Declare the variables needed for the graphics
 	public JFrame frame;
@@ -44,12 +45,14 @@ public class BasicGameApp implements Runnable, KeyListener {
 	public Image frogPic;
 	public Image background;
 	public Image fishPic;
+	public Image sharkPic;
 	public Fish[] fishes;
 
    //Declare the objects used in the program
    //These are things that are made up of more than one variable type
 	private Crocodile croc;
 	private Frog frog1;
+	private Shark shark1;
 
    // Main method definition
    // This is the code that runs first and automatically
@@ -70,14 +73,17 @@ public class BasicGameApp implements Runnable, KeyListener {
       //variable and objects
       //create (construct) the objects needed for the game and load up
 
-		crocPic = Toolkit.getDefaultToolkit().getImage("crocodile.jpg"); //load the picture
+		crocPic = Toolkit.getDefaultToolkit().getImage("crocodile.png"); //load the picture
 		croc = new Crocodile(10,100);
 
-		frogPic = Toolkit.getDefaultToolkit().getImage("frog.jpg"); //load the picture
+		frogPic = Toolkit.getDefaultToolkit().getImage("frog.png"); //load the picture
 		frog1 = new Frog(0,0);
 
-		fishPic = Toolkit.getDefaultToolkit().getImage("fish.jpg"); //load the picture
+		fishPic = Toolkit.getDefaultToolkit().getImage("fish.png"); //load the picture
 		fishes = new Fish[4];
+
+		sharkPic = Toolkit.getDefaultToolkit().getImage("shark.png"); //load the picture
+		shark1 = new Shark(100,100);
 
 		for(int i = 0; i < fishes.length; i++) {
 			fishes[i] = new Fish((int)(Math.random()*1000), (int)(Math.random()*650));
@@ -111,6 +117,7 @@ public class BasicGameApp implements Runnable, KeyListener {
       //calls the move( ) code in the objects
 		croc.move();
 		frog1.move();
+		shark1.move();
 		for(int i = 0; i < fishes.length; i++) {
 			fishes[i].move();
 		}
@@ -163,10 +170,19 @@ public class BasicGameApp implements Runnable, KeyListener {
 		Graphics2D g = (Graphics2D) bufferStrategy.getDrawGraphics();
 		g.clearRect(0, 0, WIDTH, HEIGHT);
 
+		if(backgroundX > -1000) {
+			backgroundX = backgroundX-5;
+		} else {
+			backgroundX = 0;
+		}
+
       //draw the image of the astronaut
-		g.drawImage(background,0, 0, WIDTH, HEIGHT, null);
+		g.drawImage(background,backgroundX, 0, WIDTH, HEIGHT, null);
+		g.drawImage(background,backgroundX+1000, 0, WIDTH, HEIGHT, null);
+
 		g.drawImage(crocPic, croc.xpos, croc.ypos, croc.width, croc.height, null);
 		g.drawImage(frogPic, frog1.xpos, frog1.ypos, frog1.width, frog1.height, null);
+		g.drawImage(sharkPic, shark1.xpos, shark1.ypos, shark1.width, shark1.height, null);
 
 		for(int i = 0; i < fishes.length; i++) {
 			g.drawImage(fishPic, fishes[i].xpos, fishes[i].ypos, fishes[i].width, fishes[i].height, null);
