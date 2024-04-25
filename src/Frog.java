@@ -34,6 +34,8 @@ public class Frog {
         height = 70;
         isAlive = true;
 
+        rec = new Rectangle(xpos,ypos,height,width);
+
     } // constructor
 
     //The move method.  Everytime this is run (or "called") the hero's x position and y position change by dx and dy

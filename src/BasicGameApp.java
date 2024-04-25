@@ -53,8 +53,9 @@ public class BasicGameApp implements Runnable, KeyListener {
 	private Crocodile croc;
 	private Frog frog1;
 	private Shark shark1;
+	public int score = 0;
 
-   // Main method definition
+	// Main method definition
    // This is the code that runs first and automatically
 	public static void main(String[] args) {
 		BasicGameApp ex = new BasicGameApp();   //creates a new instance of the game
@@ -80,7 +81,7 @@ public class BasicGameApp implements Runnable, KeyListener {
 		frog1 = new Frog(0,0);
 
 		fishPic = Toolkit.getDefaultToolkit().getImage("fish.png"); //load the picture
-		fishes = new Fish[4];
+		fishes = new Fish[3];
 
 		sharkPic = Toolkit.getDefaultToolkit().getImage("shark.png"); //load the picture
 		shark1 = new Shark(100,100);
@@ -120,6 +121,26 @@ public class BasicGameApp implements Runnable, KeyListener {
 		shark1.move();
 		for(int i = 0; i < fishes.length; i++) {
 			fishes[i].move();
+		}
+	}
+
+	public void checkIntersections() {
+		if(croc.rec.intersects(shark1.rec)) {
+			shark1.isAlive = false;
+			score -= 2;
+			System.out.println("Score: " + score);
+		}
+
+		if(croc.rec.intersects(fish.rec)) {
+			shark1.isAlive = false;
+			score += 1;
+			System.out.println("Score: " + score);
+		}
+
+		if(croc.rec.intersects(frog1.rec)) {
+			shark1.isAlive = false;
+			score += 3;
+			System.out.println("Score: " + score);
 		}
 	}
 	
