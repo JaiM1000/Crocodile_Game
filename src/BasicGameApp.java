@@ -122,6 +122,7 @@ public class BasicGameApp implements Runnable, KeyListener {
 		for(int i = 0; i < fishes.length; i++) {
 			fishes[i].move();
 		}
+		checkIntersections();
 	}
 
 	public void checkIntersections() {
@@ -131,14 +132,17 @@ public class BasicGameApp implements Runnable, KeyListener {
 			System.out.println("Score: " + score);
 		}
 
-		if(croc.rec.intersects(fish.rec)) {
-			shark1.isAlive = false;
-			score += 1;
-			System.out.println("Score: " + score);
-		}
+		/*
+		for(int i = 0; i < fishes.length; i++) {
+			if(croc.rec.intersects(fish.rec)) {
+				shark1.isAlive = false;
+				score += 1;
+				System.out.println("Score: " + score);
+			}
+		 */
 
 		if(croc.rec.intersects(frog1.rec)) {
-			shark1.isAlive = false;
+			//shark1.isAlive = false;
 			score += 3;
 			System.out.println("Score: " + score);
 		}
@@ -202,8 +206,15 @@ public class BasicGameApp implements Runnable, KeyListener {
 		g.drawImage(background,backgroundX+1000, 0, WIDTH, HEIGHT, null);
 
 		g.drawImage(crocPic, croc.xpos, croc.ypos, croc.width, croc.height, null);
+		g.drawRect( croc.rec.x, croc.rec.y, croc.rec.width, croc.rec.height);
+
 		g.drawImage(frogPic, frog1.xpos, frog1.ypos, frog1.width, frog1.height, null);
 		g.drawImage(sharkPic, shark1.xpos, shark1.ypos, shark1.width, shark1.height, null);
+
+		//g.setColor(Color.black);
+		//g.fillRect(147, 22, 70, 50);
+		g.setColor(Color.WHITE);
+		g.drawString("Score: " + score, 50, 50);
 
 		for(int i = 0; i < fishes.length; i++) {
 			g.drawImage(fishPic, fishes[i].xpos, fishes[i].ypos, fishes[i].width, fishes[i].height, null);

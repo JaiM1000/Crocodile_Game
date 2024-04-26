@@ -15,8 +15,10 @@ public class Fish {
     public int width;
     public int height;
     public boolean isAlive;            //a boolean to denote if the hero is alive or dead.
-
     public Rectangle rec;
+
+
+  //  public Rectangle rec;
 
     // METHOD DEFINITION SECTION
 
@@ -40,6 +42,8 @@ public class Fish {
 
     //The move method.  Everytime this is run (or "called") the hero's x position and y position change by dx and dy
     public void move() {
+        rec = new Rectangle(xpos,ypos,height,width);
+
         xpos = xpos + dx;
         ypos = ypos + dy;
 

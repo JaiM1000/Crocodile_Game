@@ -14,6 +14,7 @@ public class Crocodile {
     public int dy;                    //the speed of the hero in the y direction
     public int width;
     public int height;
+    public Rectangle rec;
     public boolean isAlive;            //a boolean to denote if the hero is alive or dead.
 
 
@@ -40,6 +41,8 @@ public class Crocodile {
 
     //The move method.  Everytime this is run (or "called") the hero's x position and y position change by dx and dy
     public void move() {
+        rec = new Rectangle(xpos,ypos,height,width);
+
         xpos = xpos + dx;
         ypos = ypos + dy;
     }
