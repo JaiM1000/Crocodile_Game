@@ -130,16 +130,20 @@ public class BasicGameApp implements Runnable, KeyListener {
 			shark1.isAlive = false;
 			score -= 2;
 			System.out.println("Score: " + score);
+			shark1.dx = (int)(Math.random()*WIDTH);
+			shark1.dy = (int)(Math.random()*HEIGHT);
 		}
 
-		/*
+
 		for(int i = 0; i < fishes.length; i++) {
-			if(croc.rec.intersects(fish.rec)) {
+			if (croc.rec.intersects(fish[i].rec)) {
 				shark1.isAlive = false;
 				score += 1;
 				System.out.println("Score: " + score);
+				fish[i].dx = (int)(Math.random()*WIDTH);
+				fish[i].dy = 0;
 			}
-		 */
+
 
 		if(croc.rec.intersects(frog1.rec)) {
 			//shark1.isAlive = false;
