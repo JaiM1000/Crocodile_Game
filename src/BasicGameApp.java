@@ -92,7 +92,7 @@ public class BasicGameApp implements Runnable, KeyListener {
 		
 		background = Toolkit.getDefaultToolkit().getImage("RiverBackground.jpg"); //load the picture
 
-	}// BasicGameApp()
+	}
 
    
 //*******************************************************************************
@@ -126,29 +126,41 @@ public class BasicGameApp implements Runnable, KeyListener {
 	}
 
 	public void checkIntersections() {
-		if(croc.rec.intersects(shark1.rec)) {
+		if(croc.rec.intersects(shark1.rec) && croc.isCrashing == false) {
 			shark1.isAlive = false;
 			score -= 2;
 			System.out.println("Score: " + score);
-			shark1.dx = (int)(Math.random()*WIDTH);
-			shark1.dy = (int)(Math.random()*HEIGHT);
+			shark1.xpos = (int)(Math.random()*1000);
+			shark1.ypos = (int)(Math.random()*650);
+			croc.isCrashing = true;
+		}
+		if(croc.rec.intersects(shark1.rec) == false) {
+			croc.isCrashing = false;
 		}
 
 
 		for(int i = 0; i < fishes.length; i++) {
-			if (croc.rec.intersects(fish[i].rec)) {
+			if (croc.rec.intersects(fishes[i].rec)) {
 				shark1.isAlive = false;
 				score += 1;
 				System.out.println("Score: " + score);
-				fish[i].dx = (int)(Math.random()*WIDTH);
-				fish[i].dy = 0;
+				fishes[i].xpos = (int) (Math.random() * WIDTH);
+				fishes[i].ypos = 0;
 			}
+		}
 
 
-		if(croc.rec.intersects(frog1.rec)) {
-			//shark1.isAlive = false;
+
+		if(croc.rec.intersects(frog1.rec) && croc.isCrashing == false) {
+			frog1.isAlive = false;
 			score += 3;
 			System.out.println("Score: " + score);
+			frog1.xpos = (int)(Math.random()*950 + 50);
+			frog1.ypos = (int)(Math.random()*600 + 50);
+			croc.isCrashing = true;
+		}
+		if(croc.rec.intersects(frog1.rec) == false) {
+			croc.isCrashing = false;
 		}
 	}
 	
@@ -210,7 +222,6 @@ public class BasicGameApp implements Runnable, KeyListener {
 		g.drawImage(background,backgroundX+1000, 0, WIDTH, HEIGHT, null);
 
 		g.drawImage(crocPic, croc.xpos, croc.ypos, croc.width, croc.height, null);
-		g.drawRect( croc.rec.x, croc.rec.y, croc.rec.width, croc.rec.height);
 
 		g.drawImage(frogPic, frog1.xpos, frog1.ypos, frog1.width, frog1.height, null);
 		g.drawImage(sharkPic, shark1.xpos, shark1.ypos, shark1.width, shark1.height, null);

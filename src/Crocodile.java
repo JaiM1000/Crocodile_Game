@@ -16,6 +16,7 @@ public class Crocodile {
     public int height;
     public Rectangle rec;
     public boolean isAlive;            //a boolean to denote if the hero is alive or dead.
+    public boolean isCrashing;
 
 
     // METHOD DEFINITION SECTION
@@ -36,6 +37,7 @@ public class Crocodile {
         isAlive = true;
 
         rec = new Rectangle(xpos,ypos,height,width);
+        isCrashing = false;
 
     } // constructor
 
@@ -45,5 +47,18 @@ public class Crocodile {
 
         xpos = xpos + dx;
         ypos = ypos + dy;
+
+        if(xpos >= 940){
+            xpos -= 10;
+        }
+        if(xpos < 0){
+            xpos += 10;
+        }
+        if(ypos < 20){
+            ypos += 10;
+        }
+        if(ypos >= 650){
+            ypos -= 10;
+        }
     }
 }
