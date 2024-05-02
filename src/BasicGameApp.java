@@ -46,6 +46,8 @@ public class BasicGameApp implements Runnable, KeyListener {
 	public Image background;
 	public Image fishPic;
 	public Image sharkPic;
+	public Image loser;
+	public Image winner;
 	public Fish[] fishes;
 
    //Declare the objects used in the program
@@ -91,7 +93,8 @@ public class BasicGameApp implements Runnable, KeyListener {
 		}
 		
 		background = Toolkit.getDefaultToolkit().getImage("RiverBackground.jpg"); //load the picture
-
+		loser = Toolkit.getDefaultToolkit().getImage("loser.png");
+		winner = Toolkit.getDefaultToolkit().getImage("winner.png");
 	}
 
    
@@ -146,6 +149,11 @@ public class BasicGameApp implements Runnable, KeyListener {
 				System.out.println("Score: " + score);
 				fishes[i].xpos = (int) (Math.random() * WIDTH);
 				fishes[i].ypos = 0;
+			}
+
+			if(fishes[i].ypos >= 700) {
+				score -= 1;
+				System.out.println("Score: " + score);
 			}
 		}
 
@@ -233,6 +241,42 @@ public class BasicGameApp implements Runnable, KeyListener {
 
 		for(int i = 0; i < fishes.length; i++) {
 			g.drawImage(fishPic, fishes[i].xpos, fishes[i].ypos, fishes[i].width, fishes[i].height, null);
+		}
+
+		if(score <= -5) {
+			croc.dx = 0;
+			croc.dy = 0;
+
+			shark1.dx = 0;
+			shark1.dy = 0;
+
+			frog1.dx = 0;
+			frog1.dy = 0;
+
+			for(int i = 0; i < fishes.length; i++) {
+				fishes[i].dx = 0;
+				fishes[i].dy = 0;
+			}
+
+			g.drawImage(loser,0, 0, WIDTH, HEIGHT, null);
+		}
+
+		if(score >= 25) {
+			croc.dx = 0;
+			croc.dy = 0;
+
+			shark1.dx = 0;
+			shark1.dy = 0;
+
+			frog1.dx = 0;
+			frog1.dy = 0;
+
+			for(int i = 0; i < fishes.length; i++) {
+				fishes[i].dx = 0;
+				fishes[i].dy = 0;
+			}
+
+			g.drawImage(winner,0, 0, WIDTH, HEIGHT, null);
 		}
 
 		g.dispose();
