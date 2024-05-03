@@ -48,6 +48,7 @@ public class BasicGameApp implements Runnable, KeyListener {
 	public Image sharkPic;
 	public Image loser;
 	public Image winner;
+	public Image rules;
 	public Fish[] fishes;
 
    //Declare the objects used in the program
@@ -56,6 +57,7 @@ public class BasicGameApp implements Runnable, KeyListener {
 	private Frog frog1;
 	private Shark shark1;
 	public int score = 0;
+	boolean startGame = false;
 
 	// Main method definition
    // This is the code that runs first and automatically
@@ -95,6 +97,7 @@ public class BasicGameApp implements Runnable, KeyListener {
 		background = Toolkit.getDefaultToolkit().getImage("RiverBackground.jpg"); //load the picture
 		loser = Toolkit.getDefaultToolkit().getImage("loser.png");
 		winner = Toolkit.getDefaultToolkit().getImage("winner.png");
+		rules = Toolkit.getDefaultToolkit().getImage("rules.png");
 	}
 
    
@@ -131,7 +134,7 @@ public class BasicGameApp implements Runnable, KeyListener {
 	public void checkIntersections() {
 		if(croc.rec.intersects(shark1.rec) && croc.isCrashing == false) {
 			shark1.isAlive = false;
-			score -= 2;
+			score -= 1;
 			System.out.println("Score: " + score);
 			shark1.xpos = (int)(Math.random()*1000);
 			shark1.ypos = (int)(Math.random()*650);
@@ -145,13 +148,13 @@ public class BasicGameApp implements Runnable, KeyListener {
 		for(int i = 0; i < fishes.length; i++) {
 			if (croc.rec.intersects(fishes[i].rec)) {
 				shark1.isAlive = false;
-				score += 1;
+				score += 2;
 				System.out.println("Score: " + score);
 				fishes[i].xpos = (int) (Math.random() * WIDTH);
 				fishes[i].ypos = 0;
 			}
 
-			if(fishes[i].ypos >= 700) {
+			if(fishes[i].ypos <= 0) {
 				score -= 1;
 				System.out.println("Score: " + score);
 			}
@@ -279,6 +282,11 @@ public class BasicGameApp implements Runnable, KeyListener {
 			g.drawImage(winner,0, 0, WIDTH, HEIGHT, null);
 		}
 
+		if(startGame == false) {
+			score = 0;
+			g.drawImage(rules,0, 0, WIDTH, HEIGHT, null);
+		}
+
 		g.dispose();
 
 		bufferStrategy.show();
@@ -289,6 +297,7 @@ public class BasicGameApp implements Runnable, KeyListener {
 	}
 
 	public void keyPressed(KeyEvent e) {
+		System.out.println(e.getKeyCode());
 		if(e.getKeyCode() == 38) { // up
 			croc.dx = 0;
 			croc.dy = -7;
@@ -307,6 +316,10 @@ public class BasicGameApp implements Runnable, KeyListener {
 		if(e.getKeyCode() == 39) { // right
 			croc.dx = 7;
 			croc.dy = 0;
+		}
+
+		if(e.getKeyCode() == 10) {
+			startGame = true;
 		}
 	}
 

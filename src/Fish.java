@@ -32,7 +32,7 @@ public class Fish {
         xpos = pXpos;
         ypos = pYpos;
         dx = 0;
-        dy = 6;
+        dy = 5;
         width = 50;
         height = 50;
         isAlive = true;
