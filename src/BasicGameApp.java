@@ -122,13 +122,15 @@ public class BasicGameApp implements Runnable, KeyListener {
 	public void moveThings()
 	{
       //calls the move( ) code in the objects
-		croc.move();
-		frog1.move();
-		shark1.move();
-		for(int i = 0; i < fishes.length; i++) {
-			fishes[i].move();
+		if(-5 < score && score < 25) {
+			croc.move();
+			frog1.move();
+			shark1.move();
+			for(int i = 0; i < fishes.length; i++) {
+				fishes[i].move();
+			}
+			checkIntersections();
 		}
-		checkIntersections();
 	}
 
 	public void checkIntersections() {
@@ -247,6 +249,10 @@ public class BasicGameApp implements Runnable, KeyListener {
 		}
 
 		if(score <= -5) {
+			g.drawImage(loser,0, 0, WIDTH, HEIGHT, null);
+
+			score = -5;
+
 			croc.dx = 0;
 			croc.dy = 0;
 
@@ -260,11 +266,13 @@ public class BasicGameApp implements Runnable, KeyListener {
 				fishes[i].dx = 0;
 				fishes[i].dy = 0;
 			}
-
-			g.drawImage(loser,0, 0, WIDTH, HEIGHT, null);
 		}
 
-		if(score >= 25) {
+		else if(score >= 25) {
+			g.drawImage(winner,0, 0, WIDTH, HEIGHT, null);
+
+			score = 25;
+
 			croc.dx = 0;
 			croc.dy = 0;
 
@@ -278,8 +286,6 @@ public class BasicGameApp implements Runnable, KeyListener {
 				fishes[i].dx = 0;
 				fishes[i].dy = 0;
 			}
-
-			g.drawImage(winner,0, 0, WIDTH, HEIGHT, null);
 		}
 
 		if(startGame == false) {
